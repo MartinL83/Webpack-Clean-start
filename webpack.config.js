@@ -27,7 +27,7 @@ module.exports = {
 	plugins: [
 		new CleanWebpackPlugin(['dist']),
 		new HtmlWebpackPlugin({
-			title: 'Dist output'
+			title: 'Webpack HTML Output'
 		})
 	],
 	devServer: {
