@@ -1,2 +1,2 @@
-/* JS entry point */
-console.log('Frontend is running!');
+/* Frontend entry point */
+import './index.scss';
