@@ -27,10 +27,7 @@ const extractSass = new ExtractTextPlugin({
 const config = {
     devtool: "source-map",
     entry: {
-        bundle: [
-            './src/index.js',
-            './src/index.scss'
-        ]
+        bundle: './src/index.js'
     },
     output: {
         path: path.resolve(__dirname, 'build'),
