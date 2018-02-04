@@ -19,7 +19,8 @@ const extractSass = new ExtractTextPlugin({
 const config = {
     devtool: "source-map",
     entry: {
-        bundle: './src/index.js'
+        bundle: './src/index.js',
+        vendor: VENDOR_LIBS
     },
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -67,11 +68,5 @@ const config = {
         })
     ]
 };
-
-// If vendor code splitting is specified, add the VENDOR_LIBS to the webpack
-// config file.
-if ( VENDOR_LIBS && VENDOR_LIBS.length >= 1 ) {
-    config.entry.vendor = VENDOR_LIBS;
-}
 
 module.exports = config;
