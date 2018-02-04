@@ -18,6 +18,7 @@ const extractSass = new ExtractTextPlugin({
 
 // Webpack config
 const config = {
+    devtool: "source-map",
     entry: {
         bundle: './src/index.js'
     },
@@ -38,11 +39,16 @@ const config = {
                     use: [
                         {
                             loader: "css-loader",
-                            options: {
+                            options : {
                                 sourceMap: true
                             }
                         },
-                        {loader: "sass-loader"}
+                        {
+                            loader: "sass-loader",
+                            options : {
+                                sourceMap: true
+                            }
+                        }
                     ],
                     fallback: "style-loader"
                 })
