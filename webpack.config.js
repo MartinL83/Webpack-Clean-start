@@ -4,28 +4,20 @@ const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const packageJSON = require('./package.json');
 
-// Get all vendor lib's from package.json
-// Defining this to split the npm packages js code from application js code.
-const VENDOR_LIBS = ( () => {
-    if (!packageJSON['dependencies']) {
-        return;
-    }
-    let depArr = [];
-    for (const package in packageJSON['dependencies']) {
-        depArr.push(package);
-    }
-    return depArr;
-})();
+// Vendor JS code splitting.
+// Specify the names of the vendor packages in the array below. 
+const VENDOR_LIBS = [
+    'babel-polyfill',
+];
 
-// Extract the css to a .css file.
+// Extract the css to a .css file and add a hash to the filename for cache busting.
 const extractSass = new ExtractTextPlugin({
     filename: "styles.[chunkhash].css",
     disable: process.env.NODE_ENV === "development"
 });
 
-// Basic setup for the config
+// Webpack config
 const config = {
-    devtool: "source-map",
     entry: {
         bundle: './src/index.js'
     },
@@ -41,10 +33,15 @@ const config = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.scss/,
+                test: /\.(css|scss)$/,
                 use: extractSass.extract({
                     use: [
-                        {loader: "css-loader"},
+                        {
+                            loader: "css-loader",
+                            options: {
+                                sourceMap: true
+                            }
+                        },
                         {loader: "sass-loader"}
                     ],
                     fallback: "style-loader"
@@ -66,9 +63,8 @@ const config = {
     ]
 };
 
-// Code splitting:
-// If package.json contains dep's. Add them to the vendor entry.
-// Will create a specific vendor.js file.
+// If vendor code splitting is specified, add the VENDOR_LIBS to the webpack
+// config file.
 if ( VENDOR_LIBS && VENDOR_LIBS.length >= 1 ) {
     config.entry.vendor = VENDOR_LIBS;
 }
