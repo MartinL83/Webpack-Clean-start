@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const packageJSON = require('./package.json');
 
 // Vendor JS code splitting.
 // Specify the names of the vendor packages in the array below. 
