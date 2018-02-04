@@ -1,9 +1,9 @@
 # A simple webpack starter
-What you will get: Webpack dev server, Babel with ES2015, SASS and simple code splitting ( node_modules and application specific code in separate js files ).
+What you will get: Webpack dev server, Babel, SASS with source maps and simple vendor code splitting.
 
-# Install & run
+## Install & run
 - npm install
 - npm run dev
 
-# Build
+## Build
 - npm run build
